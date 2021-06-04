@@ -39,7 +39,8 @@ public class Main {
         return gson.toJson(list, listType);
     }
 
-    public static List<Employee> parseCSV(String[] columnMapping, String fileName) {
+    private static List<Employee> parseCSV(String[] columnMapping, String fileName) {
+        List<Employee> staff = null;
         try (CSVReader reader = new CSVReader(new FileReader(fileName))) {
             ColumnPositionMappingStrategy<Employee> strategy = new ColumnPositionMappingStrategy<>();
             strategy.setType(Employee.class);
@@ -47,10 +48,10 @@ public class Main {
             CsvToBean<Employee> csv = new CsvToBeanBuilder<Employee>(reader)
                     .withMappingStrategy(strategy)
                     .build();
-            csv.parse();
+            staff = csv.parse();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        } return staff;
     }
 
 }
