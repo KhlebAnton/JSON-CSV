@@ -16,6 +16,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -40,20 +41,21 @@ public class Main {
         Document doc = builder.parse(new File(s));
         Node root = doc.getDocumentElement();
         NodeList nodeList = root.getChildNodes();
-        List<Employee> staff = null;
-        for (int i = 0; i < nodeList.getLength(); i++){
+        List<Employee> staff = new ArrayList<>();
+        for (int i = 0; i < nodeList.getLength(); i++) {
             Node node_ = nodeList.item(i);
             if (Node.ELEMENT_NODE == node_.getNodeType()) {
                 Element element = (Element) node_;
-                NamedNodeMap map = element.getAttributes();
-                for (int a = 0; a < map.getLength(); a++) {
-                    String attrName = map.item(a).getNodeName();
-                    String attrValue = map.item(a).getNodeValue();
-                    Employee employee = new Employee(){
 
-                    };
-
-                }
+                String stringId = element.getElementsByTagName("id").item(0).getTextContent();
+                long id = Integer.parseInt(stringId);
+                String firstName = element.getElementsByTagName("firstName").item(0).getTextContent();
+                String lastName = element.getElementsByTagName("lastName").item(0).getTextContent();
+                String country = element.getElementsByTagName("country").item(0).getTextContent();
+                String stringAge = element.getElementsByTagName("age").item(0).getTextContent();
+                int age = Integer.parseInt(stringAge);
+                Employee employee = new Employee(id, firstName, lastName, country, age);
+                staff.add(employee);
             }
         } return staff;
     }
