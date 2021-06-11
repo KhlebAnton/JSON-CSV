@@ -35,7 +35,7 @@ public class Main {
 
     }
 
-    private static List<Employee> parseXML(String s) throws ParserConfigurationException, IOException, SAXException {
+    public static List<Employee> parseXML(String s) throws ParserConfigurationException, IOException, SAXException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         Document doc = builder.parse(new File(s));
@@ -68,7 +68,7 @@ public class Main {
         }
     }
 
-    private static <T> String listToJson(List<Employee> list) {
+    public static <T> String listToJson(List<Employee> list) {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
         Type listType = new TypeToken<List<T>>() {
@@ -76,7 +76,7 @@ public class Main {
         return gson.toJson(list, listType);
     }
 
-    private static List<Employee> parseCSV(String[] columnMapping, String fileName) {
+    public static List<Employee> parseCSV(String[] columnMapping, String fileName) {
         List<Employee> staff = null;
         try (CSVReader reader = new CSVReader(new FileReader(fileName))) {
             ColumnPositionMappingStrategy<Employee> strategy = new ColumnPositionMappingStrategy<>();

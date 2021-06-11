@@ -5,6 +5,15 @@ public class Employee {
     public String country;
     public int age;
 
+    @Override
+    public String toString() {
+        return "{" + id + " " + firstName +
+                " " + lastName +
+                " " + country +
+                " " + age + "}";
+    }
+
+
     public Employee() {
 
     }
